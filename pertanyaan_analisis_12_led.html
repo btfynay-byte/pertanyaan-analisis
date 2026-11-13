@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pertanyaan Analisis - 12 LED Arduino</title>
+<style>
+:root{--navy:#142b4a;--blue:#2878b5;--pale:#eaf4fc;--ink:#253750;--line:#d8e2ed}
+*{box-sizing:border-box}body{margin:0;padding:30px 16px;background:#f3f6fa;color:var(--ink);font:16px/1.7 Arial, sans-serif}
+.page{max-width:950px;margin:auto;background:white;border:1px solid var(--line);border-radius:15px;overflow:hidden;box-shadow:0 8px 28px #142b4a12}
+header{padding:30px 34px;background:linear-gradient(120deg,var(--navy),var(--blue));color:white}
+.eyebrow{margin:0 0 8px;color:#cfe8ff;font-size:12px;font-weight:bold;letter-spacing:1.4px;text-transform:uppercase}
+h1{margin:0;font-size:30px;line-height:1.3}header p:last-child{margin:8px 0 0;color:#e8f3ff}
+main{padding:28px 34px}.intro{padding:14px 17px;margin-bottom:22px;background:var(--pale);border-left:4px solid var(--blue);border-radius:8px}
+.question{padding:20px;margin:0 0 20px;border:1px solid var(--line);border-radius:12px}
+h2{margin:0 0 12px;color:var(--navy);font-size:17px;line-height:1.5}
+.answer{display:block;margin-bottom:5px;color:var(--blue);font-size:12px;font-weight:bold;letter-spacing:.7px;text-transform:uppercase}
+.question p{margin:0}code{font-family:Consolas,monospace;background:#eef3f8;color:#174d7a;padding:2px 5px;border-radius:4px}
+pre{margin:12px 0 0;padding:18px;overflow-x:auto;border-radius:10px;background:#14263d;color:#edf5ff;font:14px/1.7 Consolas,monospace}
+pre code{padding:0;background:none;color:inherit}.note{margin-top:14px!important;padding:12px 14px;background:#f1f7fc;border-radius:8px;font-size:14px}
+footer{padding:15px;border-top:1px solid var(--line);text-align:center;color:#64748b;font-size:12px}
+@media(max-width:600px){body{padding:10px 7px}header,main{padding:22px 17px}.question{padding:16px}h1{font-size:24px}pre{font-size:12px}}
+</style>
+</head>
+<body>
+<div class="page">
+<header><p class="eyebrow">Praktikum Arduino Uno</p><h1>B. Pertanyaan Analisis</h1><p>Pengendalian 12 Lampu LED pada Pin Digital 2 sampai 13</p></header>
+<main>
+<div class="intro">Bagian ini berisi jawaban analisis mengenai fungsi perintah Arduino, cara kerja pola Flip-Flop, pengaruh nilai delay, dan pembuatan pola Running LED.</div>
+
+<section class="question">
+<h2>1. Jelaskan fungsi dari perintah <code>pinMode(ledPins[i], OUTPUT);</code> dalam sketch di atas!</h2>
+<span class="answer">Jawaban</span>
+<p>Perintah <code>pinMode(ledPins[i], OUTPUT);</code> berfungsi untuk mengatur seluruh pin Arduino yang terhubung dengan 12 LED (Pin 2 sampai Pin 13) sebagai pin keluaran (output), sehingga Arduino dapat mengendalikan setiap LED untuk menyala dan mati.</p>
+</section>
+
+<section class="question">
+<h2>2. Bagaimana cara kerja fungsi <code>digitalWrite()</code> dalam menghasilkan efek Flip-Flop?</h2>
+<span class="answer">Jawaban</span>
+<p>Fungsi <code>digitalWrite()</code> bekerja dengan memberikan logika HIGH untuk menyalakan LED dan LOW untuk mematikan LED. Pada 12 LED, perintah ini mengatur kelompok LED ganjil dan genap agar menyala secara bergantian dengan bantuan <code>delay()</code>, sehingga menghasilkan efek Flip-Flop.</p>
+</section>
+
+<section class="question">
+<h2>3. Apa yang terjadi pada rangkaian jika nilai <code>delay()</code> diubah dari 1000 menjadi 200? Jelaskan alasannya!</h2>
+<span class="answer">Jawaban</span>
+<p>Jika nilai <code>delay()</code> diubah dari 1000 menjadi 200, pergantian nyala 12 LED menjadi lebih cepat. Hal ini karena waktu jeda berkurang dari 1 detik menjadi 0,2 detik, sehingga LED menyala dan mati dengan interval yang lebih singkat.</p>
+</section>
+
+<section class="question">
+<h2>4. Jika Anda ingin membuat 12 LED menyala berurutan (Running LED) dari LED 1 sampai LED 12, kemudian kembali ke LED 1, bagaimana Anda akan memodifikasi sketch di bagian <code>void loop()</code>?</h2>
+<span class="answer">Jawaban</span>
+<p>Saya akan menggunakan perulangan <code>for</code> untuk menyalakan 12 LED secara bergantian dari Pin 2 sampai Pin 13, kemudian mematikannya satu per satu dengan bantuan <code>digitalWrite()</code> dan <code>delay()</code>.</p>
+<p style="margin-top:14px"><strong>Contoh program pada bagian <code>void loop()</code>:</strong></p>
+<pre><code>void loop() {
+  // Running LED maju
+  for (int i = 0; i &lt; 12; i++) {
+    digitalWrite(ledPins[i], HIGH);
+    delay(500);
+    digitalWrite(ledPins[i], LOW);
+  }
+
+  // Running LED mundur
+  for (int i = 10; i &gt; 0; i--) {
+    digitalWrite(ledPins[i], HIGH);
+    delay(500);
+    digitalWrite(ledPins[i], LOW);
+  }
+}</code></pre>
+<p class="note"><strong>Catatan:</strong> Program tersebut menggunakan 12 LED pada Pin 2–13. Pola bergerak dari LED pertama ke LED kedua belas, kemudian kembali ke arah LED pertama secara berulang.</p>
+</section>
+</main>
+<footer>Dokumentasi Praktikum Arduino Uno • 12 Pola LED</footer>
+</div>
+</body>
+</html>
